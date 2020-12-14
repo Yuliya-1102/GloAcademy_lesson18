@@ -20,15 +20,16 @@ function countTimer(deadline){
 let time = countTimer('31 december 2020');
 
 function addgreeting(){
+    
     let hours = date.getHours();
 
-    if(hours > 0 && hours < 6) {
+    if(hours >= 0 && hours < 6) {
         return 'Доброй ночи';
-    } else if(hours > 6 && hours < 12) {
+    } else if(hours >= 6 && hours < 12) {
         return 'Доброе утро';
-    } else if(hours > 12 && hours < 18) {
+    } else if(hours >= 12 && hours < 18) {
         return 'Добрый день';
-    } else if(hours > 18 && hours < 24) {
+    } else if(hours >= 18 && hours <= 24) {
         return 'Добрый вечер';
     }
 }
