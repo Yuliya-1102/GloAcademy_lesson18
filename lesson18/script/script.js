@@ -63,7 +63,6 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
         const popupBtn = document.querySelectorAll('.popup-btn');
         const popupClose = document.querySelector('.popup-close');
         const popupContent = document.querySelector('.popup-content');
-        let clientWidth = document.documentElement.clientWidth;
      
         
         //агимация
@@ -83,10 +82,10 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
           }
         // использование анимации
         popupBtn.forEach((elem) => {
-            if(clientWidth > 768) {
-                elem.addEventListener('click', () => {
+            elem.addEventListener('click', () => {
+                let clientWidth = document.documentElement.clientWidth;
+                if(clientWidth > 768){
                     popup.style.display = 'block';
-                    let popupContentWidth = popupContent.offsetWidth;
                     animate({
                         duration: 1000,
                         timing: function(timeFraction) {
@@ -96,14 +95,11 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
                             popupContent.style.left = (progress * 50) + '%';
                             popupContent.style.transform = 'translateX(-50%)';
                         }
-                    });
-                });
-            } else{
-                elem.addEventListener('click', () => {
+                    });                        
+                } else{
                     popup.style.display = 'block';
-                });
-            }
-           
+                }
+            });
         });
     
         popupClose.addEventListener('click', () => {
