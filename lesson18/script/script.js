@@ -111,5 +111,25 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
         });
     };
     togglePopUp();
+
+    // плавный скролл
+    const addScroll = () => {
+        const menu = document.querySelector('menu');
+        const menuList = menu.querySelectorAll('ul>li>a');
+        const container = document.querySelectorAll('.container');
+        console.log('container: ', container.parentElement);
+
+        menuList.forEach((elem) => {
+            let linkHref = elem.hash.slice(1);
+            elem.addEventListener('click', () => {
+                container.forEach((item) => {
+                    if(linkHref === item.parentElement.className){
+                        item.scrollIntoView({block: "start", behavior: "smooth"});
+                    }
+                });
+            });
+        });
+    };
+    addScroll();
 });
 
