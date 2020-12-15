@@ -117,7 +117,8 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
         const menu = document.querySelector('menu');
         const menuList = menu.querySelectorAll('ul>li>a');
         const container = document.querySelectorAll('.container');
-        console.log('container: ', container.parentElement);
+        const serviceBlockBtn = document.querySelector('a[href*="#service-block"]');
+        const service = document.querySelector('.service');
 
         menuList.forEach((elem) => {
             let linkHref = elem.hash.slice(1);
@@ -128,6 +129,10 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
                     }
                 });
             });
+        });
+
+        serviceBlockBtn.addEventListener('click', () => {
+            service.scrollIntoView({block: "start", behavior: "smooth"});
         });
     };
     addScroll();
