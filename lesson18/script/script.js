@@ -38,5 +38,78 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
     }
 
     countTimer('15 december 2020');
+
+    //меню
+    const toggleMenu = () => {
+        const btnMenu = document.querySelector('.menu');
+        const menu = document.querySelector('menu');
+        const closeBtn = document.querySelector('.close-btn');  
+        const menuItems = menu.querySelectorAll('ul>li');
+
+        const handlerMenu = () => {
+           menu.classList.toggle('active-menu');
+        };
+    
+        btnMenu.addEventListener('click', handlerMenu);
+        closeBtn.addEventListener('click', handlerMenu);
+   
+        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+
+    };    
+    toggleMenu();
+
+    const togglePopUp = () => {
+        const popup = document.querySelector('.popup');
+        const popupBtn = document.querySelectorAll('.popup-btn');
+        const popupClose = document.querySelector('.popup-close');
+        const popupContent = document.querySelector('.popup-content');
+        let clientWidth = document.documentElement.clientWidth;
+     
+        
+        //агимация
+        function animate({duration, draw, timing}) {
+            let start = performance.now();
+            requestAnimationFrame(function animate(time) {
+              let timeFraction = (time - start) / duration;
+              if (timeFraction > 1) {
+                  timeFraction = 1;
+                }
+              let progress = timing(timeFraction);
+              draw(progress);
+              if (timeFraction < 1) {
+                requestAnimationFrame(animate);
+              }
+            });
+          }
+        // использование анимации
+        popupBtn.forEach((elem) => {
+            if(clientWidth > 768) {
+                elem.addEventListener('click', () => {
+                    popup.style.display = 'block';
+                    let popupContentWidth = popupContent.offsetWidth;
+                    animate({
+                        duration: 1000,
+                        timing: function(timeFraction) {
+                        return timeFraction;
+                        },
+                        draw: function(progress) {
+                            popupContent.style.left = (progress * 50) + '%';
+                            popupContent.style.transform = 'translateX(-50%)';
+                        }
+                    });
+                });
+            } else{
+                elem.addEventListener('click', () => {
+                    popup.style.display = 'block';
+                });
+            }
+           
+        });
+    
+        popupClose.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    };
+    togglePopUp();
 });
 
