@@ -41,26 +41,25 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
     //меню
     const toggleMenu = () => {
         const menu = document.querySelector('menu');
-        const mainBlock = document.querySelector('main');
+        const body = document.querySelector('body');
 
         const handlerMenu = () => {
            menu.classList.toggle('active-menu');
         };
 
-        mainBlock.addEventListener('click', (event) => {
+        body.addEventListener('click', (event) => {
             let target = event.target;
-                target = target.closest('.menu');
-                if(target){
+                if(target.closest('.menu')){
                     handlerMenu();
+                } else if(target.classList.contains('close-btn')){
+                    handlerMenu();
+                } else if(target.closest('menu') && !target.classList.contains('active-menu')){
+                    handlerMenu();
+                } else if(target.classList.contains('active-menu')){
+                    menu.classList.add('active-menu');
+                } else{
+                    menu.classList.remove('active-menu');
                 }
-        });
-        menu.addEventListener('click', (event) => {
-            let target = event.target;
-            if(target.classList.contains('close-btn')){
-                handlerMenu();
-            } else if(target.closest('a')){
-                handlerMenu();
-            } 
         });
     };    
     toggleMenu();
