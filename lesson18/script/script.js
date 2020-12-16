@@ -36,36 +36,42 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
         }
         let idInterval = setInterval(updateClock, 1000);
     }
-
     countTimer('15 december 2020');
 
     //меню
     const toggleMenu = () => {
-        const btnMenu = document.querySelector('.menu');
         const menu = document.querySelector('menu');
-        const closeBtn = document.querySelector('.close-btn');  
-        const menuItems = menu.querySelectorAll('ul>li');
+        const mainBlock = document.querySelector('main');
 
         const handlerMenu = () => {
            menu.classList.toggle('active-menu');
         };
-    
-        btnMenu.addEventListener('click', handlerMenu);
-        closeBtn.addEventListener('click', handlerMenu);
-   
-        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
 
+        mainBlock.addEventListener('click', (event) => {
+            let target = event.target;
+                target = target.closest('.menu');
+                if(target){
+                    handlerMenu();
+                }
+        });
+        menu.addEventListener('click', (event) => {
+            let target = event.target;
+            if(target.classList.contains('close-btn')){
+                handlerMenu();
+            } else if(target.closest('a')){
+                handlerMenu();
+            } 
+        });
     };    
     toggleMenu();
 
+    // popup
     const togglePopUp = () => {
         const popup = document.querySelector('.popup');
         const popupBtn = document.querySelectorAll('.popup-btn');
-        const popupClose = document.querySelector('.popup-close');
         const popupContent = document.querySelector('.popup-content');
-     
         
-        //агимация
+        //анимация
         function animate({duration, draw, timing}) {
             let start = performance.now();
             requestAnimationFrame(function animate(time) {
@@ -101,9 +107,19 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
                     }
                 });
          });
-    
-        popupClose.addEventListener('click', () => {
-            popup.style.display = 'none';
+        
+         // закрытие окна
+        popup.addEventListener('click', (event) => {
+            let target = event.target;
+            if(target.classList.contains('popup-close')){
+                popup.style.display = 'none';
+            } else{
+                target = target.closest('.popup-content');
+
+                if(!target){
+                    popup.style.display = 'none';
+                }
+            }
         });
     };
     togglePopUp();
@@ -132,5 +148,37 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
         });
     };
     addScroll();
+
+    //табы, делегирование
+    const tabs = () => {
+        const tabHeader = document.querySelector('.service-header');
+        const tab = tabHeader.querySelectorAll('.service-header-tab');
+        const tabContent = document.querySelectorAll('.service-tab');
+
+        const toggleTabContent = (index) => {
+            for(let i = 0; i < tabContent.length; i++){
+                if(i === index){
+                    tab[i].classList.add('active');
+                    tabContent[i].classList.remove('d-none');
+                } else{
+                    tab[i].classList.remove('active');
+                    tabContent[i].classList.add('d-none');
+                }
+            }
+        };
+
+        tabHeader.addEventListener('click', (event) => {
+            let target = event.target;
+                target = target.closest('.service-header-tab');
+                if(target){
+                    tab.forEach((item, i) => {
+                        if(target === item){
+                            toggleTabContent(i);
+                        }
+                    });
+                }
+        });
+    };
+    tabs();
 });
 
