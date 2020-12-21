@@ -204,7 +204,6 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
             dot = document.querySelectorAll('.dot');
         };
         addDots();
-        console.log(dot);
 
         const prevSlide = (elem, index, strClass) => { // удаляет класс active
             elem[index].classList.remove(strClass);
@@ -285,5 +284,46 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
 
     };
     slider();
+
+    //менять фото на наведению
+    const changePhotoCommand = () => {
+        const commandPhoto = document.querySelectorAll('.command__photo');
+         
+            commandPhoto.forEach((elem) => {
+                let targetSrc;
+                let targetDataset;
+                elem.addEventListener('mouseenter', (event) => {
+                    let target = event.target;
+                    targetSrc = target.src;
+                    targetDataset = target.dataset.img;
+
+                    target.src = targetDataset;
+                    target.dataset.img = targetSrc;
+                });
+                elem.addEventListener('mouseleave', (event) => {
+                    let target = event.target;
+
+                    target.src = targetSrc;
+                    target.dataset.img = targetDataset;
+                });
+            });
+     };
+    changePhotoCommand();
+
+    //ввод только цифр в калькулятор
+
+    const inputNumbers = () => {
+        const calcBlock = document.querySelector('.calc-block');
+
+        const validInputNumber = (event) => {
+            let target = event.target;
+            if(target.classList.contains('calc-item')){
+                target.value = target.value.replace (/\D/g, '');
+            }
+        };
+
+        calcBlock.addEventListener('input', validInputNumber);
+    };
+    inputNumbers();
 });
 
