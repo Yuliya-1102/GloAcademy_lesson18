@@ -399,5 +399,38 @@ window.addEventListener('DOMContentLoaded', function(){ //ждем загруз�
         });
     };
     calc(100);
+
+    //send-ajax-form
+    const sendForm = () => {
+        const errorMessage = 'Что-то пошло не так';
+        const loadMessage = 'Загрузка';
+        const successMesage = 'Спасибо, мы скоро с вами свяжемся';
+        const form = document.getElementById('form1');
+
+        const statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 2rem';
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'multipart/form-data');
+
+            //перед тем, как отправлять данные, нужно их получить с формы
+            const formData = new FormData(form);
+            request.send(formData); //отправили на сервер данные с form Network в разделе Headers смотрим данные
+
+            request.addEventListener('readystatechange', () => {
+                statusMessage.textContent = loadMessage;
+            });
+
+        });
+
+
+    };
+    sendForm();
+
 });
 
