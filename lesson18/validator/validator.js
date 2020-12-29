@@ -77,7 +77,6 @@ class Validator{
     showSuccess(elem){
         elem.classList.remove('error');
         elem.classList.add('success');
-        console.log(elem);
         if(elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')){
             elem.nextElementSibling.remove();
         }
@@ -106,7 +105,7 @@ class Validator{
             this.pattern.phone = /^\+?[7,8]([-()]*\d){10}$/;
         }
         if(!this.pattern.email){
-            this.pattern.email = /^\w+@\w+\.\w{2,}$/;
+            this.pattern.email = /^\w+[.,-]*\w*@\w+\.\w{2,}$/;
         }
         if(!this.pattern.name){
             this.pattern.name = /^([а-я])+$/i;
