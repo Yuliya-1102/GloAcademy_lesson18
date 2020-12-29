@@ -77,6 +77,7 @@ class Validator{
     showSuccess(elem){
         elem.classList.remove('error');
         elem.classList.add('success');
+        console.log(elem);
         if(elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')){
             elem.nextElementSibling.remove();
         }

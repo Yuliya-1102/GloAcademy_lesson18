@@ -3,7 +3,7 @@
 		selector: '#form2',
 		pattern: {
 			phone: /^\+?\d+$/,
-			name: /^([а-я])+$/gi,
+			name: /^([а-я])+$/i,
             zip: /^\d{5,6}$/
         },
 		method: {
@@ -31,7 +31,7 @@
 		selector: '#form1',
 		pattern: {
 			phone: /^\+?\d+$/,
-			name: /^([а-я])+$/gi,
+			name: /^([а-я])+$/i,
             zip: /^\d{5,6}$/
         },
 		method: {
@@ -55,7 +55,7 @@
 		selector: '#form3',
 		pattern: {
 			phone: /^\+?\d+$/,
-			name: /^([а-я])+$/gi,
+			name: /^([а-я])+$/i,
             zip: /^\d{5,6}$/
         },
 		method: {
