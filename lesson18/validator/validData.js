@@ -2,8 +2,8 @@
 	const valid2 = new Validator({
 		selector: '#form2',
 		pattern: {
-			phone: /^\d+$/,
-			name: /([а-я])+/gi,
+			phone: /^\+?\d+$/,
+			name: /^([а-я])+$/gi,
             zip: /^\d{5,6}$/
         },
 		method: {
@@ -30,8 +30,8 @@
     const valid1 = new Validator({
 		selector: '#form1',
 		pattern: {
-			phone: /^\d+$/,
-			name: /([а-я])+/gi,
+			phone: /^\+?\d+$/,
+			name: /^([а-я])+$/gi,
             zip: /^\d{5,6}$/
         },
 		method: {
@@ -54,8 +54,8 @@
     const valid3 = new Validator({
 		selector: '#form3',
 		pattern: {
-			phone: /^\d+$/,
-			name: /([а-я])+/gi,
+			phone: /^\+?\d+$/,
+			name: /^([а-я])+$/gi,
             zip: /^\d{5,6}$/
         },
 		method: {
